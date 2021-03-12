@@ -107,6 +107,88 @@ approxSpace:print_layout_statistic()
 approxSpace:print_statistic()
 OrderCuthillMcKee(approxSpace, true)
 
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+-- save refined domain to .txt, .ugx, and .swc formats 
+-- os.execute("mkdir " .. "dom-data-output")
+fout_name = "outDom"
+SaveDomain(dom, outputPath .. fout_name .. ".txt")
+print("Checkpoint --> Successfully Saved Domain to txt format")
+SaveDomain(dom, outputPath .. fout_name .. ".ugx")
+print("Checkpoint --> Successfully Saved Domain to ugx format")
+SaveDomain(dom, outputPath .. fout_name .. ".swc")
+print("Checkpoint --> Successfully Saved Domain to swc format")
+
+-- this function removes the header in the .txt file for later use
+function remove( filename, starting_line, num_lines )
+    local fp = io.open( filename, "r" )
+    if fp == nil then return nil end
+ 
+    content = {}
+    i = 1;
+    for line in fp:lines() do
+        if i < starting_line or i >= starting_line + num_lines then
+	    content[#content+1] = line
+	end
+	i = i + 1
+    end
+ 
+    if i > starting_line and i < starting_line + num_lines then
+	print( "Warning: Tried to remove lines after EOF." )
+    end
+ 
+    fp:close()
+    fp = io.open( filename, "w+" )
+ 
+    for i = 1, #content do
+	fp:write( string.format( "%s\n", content[i] ) )
+    end
+ 	print("Checkpoint --> Removed Header in TXT file!")
+    fp:close()
+end
+
+file = outputPath .. fout_name .. ".swc"
+remove(file,1,1)
+
+file = outputPath .. fout_name .. ".txt"
+remove(file,1,1)
+
+-- the reads the .txt data into tables
+-- the tables for x,y,z will be used with the evaluate at nearest coordinate
+io.input(file)	-- initialize file
+index = {}		-- initialize empty tables
+xcrd = {}
+ycrd = {}
+zcrd = {}
+ while true do
+ 	  -- read in the data to temporary variables
+      local n0, n1, n2, n3 = io.read("*number","*number", "*number","*number")
+      if not n0 then 
+      	break 
+      end
+      
+      -- append the read in values to the tables
+      table.insert(index,n0)
+      table.insert(xcrd,n1)
+      table.insert(ycrd,n2)
+      table.insert(zcrd,n3)
+end
+io.close() -- close the file
+
+-- print the data to check
+print("Checkpoint --> Check that (ind,x,y,z) saved: ")
+print ("  Index  " .. "     x     " .. "     y     " .. "     z     ")
+for i=1,table.getn(index) do
+	print("      " .. index[i] .. "  " .. xcrd[i] .. "  " .. ycrd[i] .. "  " .. zcrd[i])
+end
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+
 --------------------
 -- discretization --
 --------------------
