@@ -18,7 +18,7 @@ InitUG(3, AlgebraType("CPU", 1))
 -- read command line arguments --
 ---------------------------------
 -- choice of grid
-gridName = util.GetParam("-grid", "cable_neuron_app/grids/rat1.ugx")
+gridName = util.GetParam("-grid")
 
 -- parameters steering simulation
 numRefs = util.GetParamNumber("-numRefs", 0)
@@ -59,7 +59,7 @@ g_l_de = 1.0
 spec_cap = 1.0e-2
 
 -- resistivity (in units of Ohm m)
-spec_res = 1.5
+spec_res = 3.0
 
 -- reversal potentials (in units of V)
 e_k  = -0.09
@@ -107,7 +107,6 @@ approxSpace:print_layout_statistic()
 approxSpace:print_statistic()
 OrderCuthillMcKee(approxSpace, true)
 
-
 --------------------
 -- discretization --
 --------------------
@@ -152,7 +151,7 @@ CE:add(leak)
 -- electrode stimulation
 -- current, x, y, z, begin, duration
 -- the (x,y,z) coords need to specify an edge center!
-CE:set_influx(1e-9, 0.0, 0.0, 0.0, 0.0, 0.005)
+CE:set_influx(1e-9, 0.649282*1e-3, -0.3343175*1e-3, -0.0076*1e-3, 0.0, endTime)
 
 
 domainDisc = DomainDiscretization(approxSpace)
