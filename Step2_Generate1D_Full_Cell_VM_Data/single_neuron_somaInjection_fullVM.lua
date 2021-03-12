@@ -274,14 +274,17 @@ b = GridFunction(approxSpace)
 u:set(v_eq)
 
 -- prepare measurement point and write first measurement
-spineCoords = {1.12205e-4, 1.2571e-5, -8e-7}
-spinePos = MakeVec(spineCoords[1], spineCoords[2], spineCoords[3]) -- some arbitrary dendrite vertex pos
-
 measFileVm = outputPath .. "meas/vm_" .. string.format("%.5f", time) .. ".dat"
 measOutVm = assert(io.open(measFileVm, "w"))
-vm_at_spine = EvaluateAtClosestVertex(spinePos, u, "v", "dend", dom:subset_handler())
--- VDCC_BG_VM2UG expects voltages in mV
-measOutVm:write(spineCoords[1], "\t", spineCoords[2], "\t", spineCoords[3], "\t", 1e3*vm_at_spine, "\n")
+
+for j=1,table.getn(index) do
+	spineCoords = {xcrd[j],ycrd[j],zcrd[j]}
+	spinePos = MakeVec(spineCoords[1], spineCoords[2], spineCoords[3]) -- some arbitrary dendrite vertex pos
+	
+	vm_at_spine = EvaluateAtClosestVertex(spinePos, u, "v", "dend,soma,apic", dom:subset_handler())
+	-- VDCC_BG_VM2UG expects voltages in mV
+	measOutVm:write(spineCoords[1], "\t", spineCoords[2], "\t", spineCoords[3], "\t", 1e3*vm_at_spine, "\n")
+end
 measOutVm:close()
 
 -- write start solution
@@ -359,13 +362,22 @@ while endTime-time > 0.001*curr_dt do
 	-- update to new time
 	time = solTimeSeries:time(0) + curr_dt
 	
+	
 	-- log vm and calcium at soma
 	if math.abs(time/dt - math.floor(time/dt+0.5)) < 1e-5 then
+		-- prepare measurement point and write first measurement
 		measFileVm = outputPath .. "meas/vm_" .. string.format("%.5f", time) .. ".dat"
 		measOutVm = assert(io.open(measFileVm, "w"))
-		vm_at_spine = EvaluateAtClosestVertex(spinePos, u, "v", "dend", dom:subset_handler())
-		-- VDCC_BG_VM2UG expects voltages in mV
-		measOutVm:write(spineCoords[1], "\t", spineCoords[2], "\t", spineCoords[3], "\t", 1e3*vm_at_spine, "\n")
+
+		for j=1,table.getn(index) do
+			spineCoords = {xcrd[j],ycrd[j],zcrd[j]}
+			spinePos = MakeVec(spineCoords[1], spineCoords[2], spineCoords[3]) -- some arbitrary dendrite vertex pos
+	
+			vm_at_spine = EvaluateAtClosestVertex(spinePos, u, "v", "dend,soma,apic", dom:subset_handler())
+			-- VDCC_BG_VM2UG expects voltages in mV
+			measOutVm:write(spineCoords[1], "\t", spineCoords[2], "\t", spineCoords[3], "\t", 1e3*vm_at_spine, "\n")
+		end
+
 		measOutVm:close()
 	end
 	
