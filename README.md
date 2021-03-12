@@ -23,5 +23,8 @@ In all simulations, the directory given as output directory needs to have the su
 If you use the second way of providing the membrane potential, then the Vm files are expected in a directory "voltageData" relative to the current working directory. You may of course change that to your needs.
 
 James you to do list is the following:
-1. Run a soma injection simulation on the cell
-2. Run simulation in 1. again but this time write the voltage for the entire cell to a file
+1. [x] Run a soma injection simulation on the cell
+2. [x] Run simulation in 1. again but this time write the voltage for the entire cell to a file
+3. [ ] Make a video of the data in 2. to check
+4. [ ] Run the data in 2. in a calcium simulation with the vdcc set to on
+    - [ ] Run a constant AP vdcc simulation with calcium first
