@@ -15,6 +15,7 @@ For this project we need to provide the membrane potential that the VDCC's requi
 
 I then ran a test simulation on a reconstructed spine with both ways of providing the membrane potential traces for the VDCCs. A variable in the script can be changed to switch between both methods.
 The command I used was:
+
 	mpirun -n 4 ugshell -ex calciumDynamics_app/spine/reconstructed_spine_viet_noER.lua
 		-grid /path/to/your/reconstructed/3d/grid.ugx -numRefs 1 -tstep 0.0000125
 		-endTime 0.005 -outName /your/output/directory -solver ILU -vtk -pstep 0.0001 
