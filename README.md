@@ -8,7 +8,8 @@ For this project we need to provide the membrane potential that the VDCC's requi
    - I tested this on the "rat1" geometry from our shared data folder using the command:
 
 ```
-ugshell -ex cable_neuron_app/single_neuron_somaInjection.lua -endTime 0.1 -outName /your/output/directory -grid /path/to/your/1d/grid.ugx -dt 1e-5
+ugshell -ex cable_neuron_app/single_neuron_somaInjection.lua -endTime 0.1 
+        -outName /your/output/directory -grid /path/to/your/1d/grid.ugx -dt 1e-5
 ```
    - For lack of better knowledge, I hard-coded an arbitrary location on the geometry for output of the membrane potential into the script.
    - You can create the 1d ugx file from the hoc files in the shared folder using
