@@ -23,5 +23,5 @@ In all simulations, the directory given as output directory needs to have the su
 If you use the second way of providing the membrane potential, then the Vm files are expected in a directory "voltageData" relative to the current working directory. You may of course change that to your needs.
 
 James you to do list is the following:
-1. Import the geometry as described using the neti_import.lua script
-2. Run a soma injection simulation on the cell
+1. Run a soma injection simulation on the cell
+2. Run simulation in 1. again but this time write the voltage for the entire cell to a file
