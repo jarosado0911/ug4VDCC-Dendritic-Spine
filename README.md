@@ -2,15 +2,16 @@
 This is a proof of concept project for running VDCC experiments on 3D spine morphologies
 For this project we need to provide the membrane potential that the VDCC's require.
 1. The first way provides the global membrane potential by a function definable in the lua script itself. I used a single typical AP trace (scaled by a factor of 0.8).
-2. The second way provides the membrane potential through files that contain (for each time step) coordinates and corresponding voltages. I suppose the potential is basically the same on the whole spine morphology surface, so one point per file will probably suffice (the VDCC implementation finds the closest coordinates from the file for each point on the plasma membrane).
-The files can be generated from 1d electrical simulations using the script "cable_neuron_app/single_neuron_somaInjection.lua".
-I tested this on the "rat1" geometry from our shared data folder using the command:
+2. The second way provides the membrane potential through files that contain (for each time step) coordinates and corresponding voltages. 
+   - I suppose the potential is basically the same on the whole spine morphology surface, so one point per file will probably suffice (the VDCC implementation finds the closest coordinates from the file for each point on the plasma membrane).
+   - The files can be generated from 1d electrical simulations using the script "cable_neuron_app/single_neuron_somaInjection.lua".
+   - I tested this on the "rat1" geometry from our shared data folder using the command:
 	ugshell -ex cable_neuron_app/single_neuron_somaInjection.lua -endTime 0.1
 		-outName /your/output/directory -grid /path/to/your/1d/grid.ugx -dt 1e-5
-For lack of better knowledge, I hard-coded an arbitrary location on the geometry for output of the membrane potential into the script.
-You can create the 1d ugx file from the hoc files in the shared folder using
+   - For lack of better knowledge, I hard-coded an arbitrary location on the geometry for output of the membrane potential into the script.
+   - You can create the 1d ugx file from the hoc files in the shared folder using
 	ugshell -ex cable_neuron_app/neti_import.lua -name /path/to/geometry.hoc -method hoc
-Do not use the swc files instead. They seem to be defective.
+   - Do not use the swc files instead. They seem to be defective.
 
 I then ran a test simulation on a reconstructed spine with both ways of providing the membrane potential traces for the VDCCs. A variable in the script can be changed to switch between both methods.
 The command I used was:
