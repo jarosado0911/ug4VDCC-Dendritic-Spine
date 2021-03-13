@@ -233,7 +233,7 @@ CE:add(leak)
 -- electrode stimulation
 -- current, x, y, z, begin, duration
 -- the (x,y,z) coords need to specify an edge center!
-CE:set_influx(1e-9, 0.649282*1e-3, -0.3343175*1e-3, -0.0076*1e-3, 0.0, endTime)
+CE:set_influx(1e-9, 6.17e-06, 2.2175e-05, -6.165e-06, 0.0, endTime)
 
 
 domainDisc = DomainDiscretization(approxSpace)
