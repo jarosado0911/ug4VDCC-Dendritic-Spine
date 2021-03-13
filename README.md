@@ -30,4 +30,7 @@ James you to do list is the following:
 2. :heavy_check_mark: Run simulation in 1. again but this time write the voltage for the entire cell to a file
 3. :heavy_check_mark: Make a video of the data in 2. to check
 4. [ ] Run the data in 2. in a calcium simulation with the vdcc set to on
-    - [ ] Run a constant AP vdcc simulation with calcium first, send it to HPC for complete run, I am first doing this with no ER
+    - :heavy_check_mark: Run a constant AP vdcc simulation with calcium first, send it to HPC for complete run, I am first doing this 
+with no ER
+    - :heavy_check_mark: Run a constant AP vdcc simulation with calcium first, send it to HPC for complete run, I am first doing this 
+with no ER but with a spine 
