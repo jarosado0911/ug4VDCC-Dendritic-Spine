@@ -34,4 +34,4 @@ James you to do list is the following:
 with no ER
     - :heavy_check_mark: Run a constant AP vdcc simulation with calcium first, send it to HPC for complete run, I am first doing this 
 with no ER but with a spine 
-5. :heavy_check_mark: I ran a simulation with the full cell with complete ER and cutER (set geometries) using the real Spine Apparatus (SA)
+5. :heavy_check_mark: I ran a simulation with the full cell with complete ER and cutER (set geometries) using the real Spine Apparatus (SA) with [Ca2+] influx
