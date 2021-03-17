@@ -151,7 +151,7 @@ CE:add(leak)
 -- electrode stimulation
 -- current, x, y, z, begin, duration
 -- the (x,y,z) coords need to specify an edge center!
-CE:set_influx(1e-9, 6.17e-06, 2.2175e-05, -6.165e-06, 0.0, endTime)
+CE:set_influx(1e-9, 2.17625e-05, -9.9875e-06, -1.9225e-05, 0.0, endTime)
 
 
 domainDisc = DomainDiscretization(approxSpace)
@@ -192,7 +192,7 @@ b = GridFunction(approxSpace)
 u:set(v_eq)
 
 -- prepare measurement point and write first measurement
-spineCoords = {1.12205e-4, 1.2571e-5, -8e-7}
+spineCoords = {0.000003838, 0.000044463, -0.000005625}
 spinePos = MakeVec(spineCoords[1], spineCoords[2], spineCoords[3]) -- some arbitrary dendrite vertex pos
 
 measFileVm = outputPath .. "meas/vm_" .. string.format("%.5f", time) .. ".dat"
