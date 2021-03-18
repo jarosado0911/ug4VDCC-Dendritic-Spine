@@ -1,0 +1,1 @@
+ugshell -ex full_cell_wER.lua -grid FinalGeometries/fullcell_smallER_wSyn_V2.ugx -numRefs 0 -tstep 5.0e-6 -endTime 0.02 -vdcc 1 -caInflux 0.0001 -setting none -ryrDensity 3.75 -solver GS -outName output -vtk -pstep 0.0001 -minDef 1e-10

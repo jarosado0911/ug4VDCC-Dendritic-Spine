@@ -192,14 +192,18 @@ b = GridFunction(approxSpace)
 u:set(v_eq)
 
 -- prepare measurement point and write first measurement
-spineCoords = {0.000003838, 0.000044463, -0.000005625}
+spineCoords = {-0.000033112, 0.000099575, 0.000011325}
+
+geomscale = 800000
+spineCoordsScaled = {-0.000033112*geomscale, 0.000099575*geomscale, 0.000011325*geomscale}
+
 spinePos = MakeVec(spineCoords[1], spineCoords[2], spineCoords[3]) -- some arbitrary dendrite vertex pos
 
 measFileVm = outputPath .. "meas/vm_" .. string.format("%.5f", time) .. ".dat"
 measOutVm = assert(io.open(measFileVm, "w"))
 vm_at_spine = EvaluateAtClosestVertex(spinePos, u, "v", "dend", dom:subset_handler())
 -- VDCC_BG_VM2UG expects voltages in mV
-measOutVm:write(spineCoords[1], "\t", spineCoords[2], "\t", spineCoords[3], "\t", 1e3*vm_at_spine, "\n")
+measOutVm:write(spineCoordsScaled[1], "\t", spineCoordsScaled[2], "\t", spineCoordsScaled[3], "\t", 1e3*vm_at_spine, "\n")
 measOutVm:close()
 
 -- write start solution
@@ -283,7 +287,7 @@ while endTime-time > 0.001*curr_dt do
 		measOutVm = assert(io.open(measFileVm, "w"))
 		vm_at_spine = EvaluateAtClosestVertex(spinePos, u, "v", "dend", dom:subset_handler())
 		-- VDCC_BG_VM2UG expects voltages in mV
-		measOutVm:write(spineCoords[1], "\t", spineCoords[2], "\t", spineCoords[3], "\t", 1e3*vm_at_spine, "\n")
+		measOutVm:write(spineCoordsScaled[1], "\t", spineCoordsScaled[2], "\t", spineCoordsScaled[3], "\t", 1e3*vm_at_spine, "\n")
 		measOutVm:close()
 	end
 	

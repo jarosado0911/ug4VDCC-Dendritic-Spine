@@ -1,0 +1,1 @@
+ugshell -ex spine_noER.lua -grid reconstructed_spine.ugx -numRefs 0 -tstep 5.0e-6 -endTime 0.02 -solver GS -outName output -vtk -pstep 0.0001
