@@ -1,7 +1,15 @@
-# VDCC-Spine-Dendrite
+# ug4 Dendritic Spine
 This is a proof of concept project for running VDCC experiments on 3D spine morphologies
 For this project we need to provide the membrane potential that the VDCC's require.
-1. The first way provides the global membrane potential by a function definable in the lua script itself. I used a single typical AP trace (scaled by a factor of 0.8).
+1. The first way provides the global membrane potential by a function definable in the lua script itself. I used a single typical AP trace (scaled by a factor of 0.8). Below is a video I made from the data.
+
+<p align="center">
+  <a href="https://github.com/jarosado0911/ug4VDCC-Dendritic-Spine/tree/main/Step1_Generate1D_Voltage_Data/output">
+    <img src="https://raw.githubusercontent.com/jarosado0911/ug4VDCC-Dendritic-Spine/main/Step1_Generate1D_Voltage_Data/output/voltageVDCC.gif"
+         alt="Voltage data demo" width="350">
+  </a>
+</p>
+
 2. The second way provides the membrane potential through files that contain (for each time step) coordinates and corresponding voltages. 
    - I suppose the potential is basically the same on the whole spine morphology surface, so one point per file will probably suffice (the VDCC implementation finds the closest coordinates from the file for each point on the plasma membrane).
    - The files can be generated from 1d electrical simulations using the script "cable_neuron_app/single_neuron_somaInjection.lua".
